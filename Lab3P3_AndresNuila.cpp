@@ -34,22 +34,22 @@ string Libro::getAnio() {
 
 class Catalogo {
 private:
-    vector<Libro>libros;
+    vector<Libro*>libros;
 public:
     Catalogo();
-    Catalogo(vector<Libro>);
-    vector<Libro>getLibros();
-    void setLibro(Libro);
+    Catalogo(vector<Libro*>);
+    vector<Libro*>getLibros();
+    void setLibro(Libro*);
 };
 Catalogo::Catalogo() {
 }
-Catalogo::Catalogo(vector<Libro>_libros) {
-    libros=_libros;
+Catalogo::Catalogo(vector<Libro*>_libros) {
+    libros =_libros;
 }
-vector<Libro> Catalogo::getLibros() {
+vector<Libro*> Catalogo::getLibros() {
     return libros;
 }
-void Catalogo::setLibro(Libro l) {
+void Catalogo::setLibro(Libro* l) {
     libros.push_back(l);
 }
 
@@ -160,7 +160,7 @@ int main() {
                 cin>>autorLibro;
                 cout<<"Ingrese el anio"<<endl;
                 cin>>anioPublicacion;
-                Libro _newLibro(tituluLibro, autorLibro, anioPublicacion);
+                Libro* _libroAAñadir= new Libro(tituluLibro, autorLibro, anioPublicacion);
                 for (int i = 0; i < listaBibliotecas.size(); i++)
                 {
                     cout<<listaBibliotecas.at(i).getNombre()<<endl;
@@ -173,21 +173,40 @@ int main() {
                 cin>>estante;
                 cout<<"Ingrese la seccion"<<endl;
                 cin>>seccion;
-                for (int i = 0; i < listaBibliotecas.at(indiceBiblioteca).getPisos(); i++)
+
+                listaBibliotecas.at(indiceBiblioteca).getDivisionBiblioteca()[piso][estante][seccion]->setLibro(_libroAAñadir);
+            }
+        }break;
+        case 3:
+        {
+            string tituloABuscar;
+            cout<<"Ingrese el titulo qdel libro que desea encontar";
+            cin>>tituloABuscar;
+            for (int i = 0; i < listaBibliotecas.size(); i++)
+            {
+                for (int j = 0; j < listaBibliotecas.at(i).getPisos(); j++)
                 {
-                    for (int j = 0; j < listaBibliotecas.at(indiceBiblioteca).getEstantes(); j++)
+                    for (int k = 0; k < listaBibliotecas.at(i).getEstantes(); k++)
                     {
-                        for (int k = 0; i < listaBibliotecas.at(indiceBiblioteca).getPisos(); k++)
+                        for (int l = 0; l < listaBibliotecas.at(i).getSecciones(); l++)
                         {
-                            if (i==piso&&j==estante&&k==seccion)
+                            for (int m = 0; m < listaBibliotecas.at(i).getDivisionBiblioteca()[j][k][l]->getLibros().size(); i++)
                             {
-                                listaBibliotecas.at(indiceBiblioteca).getDivisionBiblioteca();
-                            }
+                                if (listaBibliotecas.at(i).getDivisionBiblioteca()[j][k][l]->getLibros().at(m)->getTitulo()==tituloABuscar)
+                                {
+                                    cout<<"Titulo: "<<listaBibliotecas.at(i).getDivisionBiblioteca()[j][k][l]->getLibros().at(m)->getTitulo()<<endl;
+                                    cout<<"Autor: "<<listaBibliotecas.at(i).getDivisionBiblioteca()[j][k][l]->getLibros().at(m)->getAutor()<<endl;
+                                    cout<<"Anio: "<<listaBibliotecas.at(i).getDivisionBiblioteca()[j][k][l]->getLibros().at(m)->getAnio()<<endl;
+                                    cout<<"Biblioteca: "<<listaBibliotecas.at(i).getNombre()<<endl;
+                                    cout<<"ubicado en el piso "<<j<<" de la estanteria "<<k<<" de la seccion "<<l<<endl;
+                                }  
+                              }
                         }
                     }
                 }
-            }
-        }break;
+              }
+        }
+        break;
         default:
             break;
         }
