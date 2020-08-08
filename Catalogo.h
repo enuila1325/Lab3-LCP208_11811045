@@ -15,6 +15,7 @@ public:
     Catalogo(vector<Libro*>);
     vector<Libro*>getLibros();
     void setLibro(Libro*);
+    ~Catalogo();
 };
 
 #endif

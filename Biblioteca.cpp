@@ -47,3 +47,6 @@ void Biblioteca::setNombre(string _newNombre) {
 void Biblioteca::setUbicacion(string _newUbicacion) {
     ubicacion = _newUbicacion;
 }
+Biblioteca::~Biblioteca(){
+
+}

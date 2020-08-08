@@ -33,6 +33,7 @@ int main() {
             cin>>secciones;
             Biblioteca _newBbiblioteca(nombre, ubicacion, pisos, estantes, secciones);
             listaBibliotecas.push_back(_newBbiblioteca);
+            _newBbiblioteca.~Biblioteca();
         }break;
         case 2: {
             int indiceBiblioteca=0, piso=0, estante=0, seccion=0;
@@ -57,12 +58,27 @@ int main() {
                 cin>>indiceBiblioteca;
                 cout<<"Ingrese el piso"<<endl;
                 cin>>piso;
+                while (listaBibliotecas.at(indiceBiblioteca).getPisos()<piso)
+                {
+                    cout<<"Ingrese el piso"<<endl;
+                    cin>>piso;
+                }
                 cout<<"Ingrese el estante"<<endl;
                 cin>>estante;
+                while (listaBibliotecas.at(indiceBiblioteca).getEstantes()<estante)
+                {
+                    cout<<"Ingrese el estante"<<endl;
+                    cin>>estante;
+                }
                 cout<<"Ingrese la seccion"<<endl;
                 cin>>seccion;
-
+                while (listaBibliotecas.at(indiceBiblioteca).getSecciones()<seccion)
+                {
+                    cout<<"Ingrese la seccion"<<endl;
+                    cin>>seccion;
+                }
                 listaBibliotecas.at(indiceBiblioteca).getDivisionBiblioteca()[piso][estante][seccion]->setLibro(libroNuevo);
+                cout<<"Libro agregado exitosamente"<<endl;
             }
         }break;
         case 3:
@@ -87,6 +103,9 @@ int main() {
                                     cout<<"Anio: "<<listaBibliotecas.at(i).getDivisionBiblioteca()[j][k][l]->getLibros().at(m)->getAnio()<<endl;
                                     cout<<"Biblioteca: "<<listaBibliotecas.at(i).getNombre()<<endl;
                                     cout<<"Ubicado en el piso "<<j<<" de la estanteria "<<k<<" de la seccion "<<l<<endl;
+                                }
+                                else {
+                                    cout<<"No hay registros de este titulo en el sistema"<<endl;
                                 }
                             }
                         }
@@ -118,6 +137,9 @@ int main() {
                                     cout<<"Biblioteca: "<<listaBibliotecas.at(i).getNombre()<<endl;
                                     cout<<"Ubicado en el piso "<<j<<" de la estanteria "<<k<<" de la seccion "<<l<<endl;
                                 }
+                                else {
+                                    cout<<"No hay registros de este autor en el sistema"<<endl;
+                                }
                             }
                         }
                     }
@@ -140,12 +162,32 @@ int main() {
                 }
                 cout<<"Seleccione a que biblioteca se pondra el libro"<<endl;
                 cin>>indiceBiblioteca;
+                while (indiceBiblioteca>listaBibliotecas.size())
+                {
+                    cout<<"Seleccione a que biblioteca se pondra el libro"<<endl;
+                    cin>>indiceBiblioteca;
+                }
                 cout<<"Ingrese el piso"<<endl;
                 cin>>pisoABUscar;
+                while (pisoABUscar>listaBibliotecas.at(indiceBiblioteca).getPisos())
+                {
+                    cout<<"Ingrese el piso"<<endl;
+                    cin>>pisoABUscar;
+                }
                 cout<<"Ingrese el estante"<<endl;
                 cin>>estanteABuscar;
+                while (estanteABuscar>listaBibliotecas.at(indiceBiblioteca).getEstantes())
+                {
+                    cout<<"Ingrese el estante"<<endl;
+                    cin>>estanteABuscar;
+                }
                 cout<<"Ingrese la seccion"<<endl;
                 cin>>seccionABuscar;
+                while (seccionABuscar>listaBibliotecas.at(indiceBiblioteca).getSecciones())
+                {
+                    cout<<"Ingrese la seccion"<<endl;
+                    cin>>seccionABuscar;
+                }
                 for (int i = 0; i <
                     listaBibliotecas.at(indiceBiblioteca).getDivisionBiblioteca()[pisoABUscar][estanteABuscar][seccionABuscar]->getLibros().size(); i++)
                 {

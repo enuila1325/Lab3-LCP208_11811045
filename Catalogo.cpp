@@ -12,3 +12,7 @@ vector<Libro*> Catalogo::getLibros() {
 void Catalogo::setLibro(Libro* l) {
     libros.push_back(l);
 }
+
+Catalogo::~Catalogo(){
+    
+}

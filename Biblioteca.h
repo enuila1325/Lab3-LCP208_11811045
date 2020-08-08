@@ -20,6 +20,7 @@ public:
     void setNombre(string);
     void setUbicacion(string);
     Catalogo**** getDivisionBiblioteca();
+    ~Biblioteca();
 };
 
 #endif

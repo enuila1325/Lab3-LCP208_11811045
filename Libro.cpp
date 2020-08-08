@@ -15,3 +15,7 @@ string Libro::getAutor() {
 string Libro::getAnio() {
     return anio;
 }
+
+Libro::~Libro(){
+    
+}
