@@ -1,125 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <array>
-#include<algorithm>
+#include <algorithm>
+#include "Libro.cpp"
+#include "Catalogo.cpp"
+#include "Biblioteca.cpp"
 
 using namespace std;
-
-class Libro {
-private:
-    string titulo, autor, anio;
-public:
-    Libro(string, string, string);
-    string getTitulo();
-    string getAutor();
-    string getAnio();
-    void setTitulo(string _titulo);
-    void setAutor(string _autor);
-    void setAnio(string _anio);
-};
-Libro::Libro(string _titulo, string _autor, string _anio) {
-    titulo = _titulo;
-    autor = _autor;
-    anio = _anio;
-}
-string Libro::getTitulo() {
-    return titulo;
-}
-string Libro::getAutor() {
-    return autor;
-}
-string Libro::getAnio() {
-    return anio;
-}
-
-
-class Catalogo {
-private:
-    vector<Libro*>libros;
-public:
-    Catalogo();
-    Catalogo(vector<Libro*>);
-    vector<Libro*>getLibros();
-    void setLibro(Libro*);
-};
-Catalogo::Catalogo() {
-}
-Catalogo::Catalogo(vector<Libro*>_libros) {
-    libros =_libros;
-}
-vector<Libro*> Catalogo::getLibros() {
-    return libros;
-}
-void Catalogo::setLibro(Libro* l) {
-    libros.push_back(l);
-}
-
-
-class Biblioteca {
-private:
-    string nombre, ubicacion;
-    Catalogo**** divisionBiblioteca;
-    int pisos, secciones, estantes;
-
-public:
-    Biblioteca(string, string, int, int, int);
-    string getNombre();
-    string getUbicacion();
-    int getPisos();
-    int getEstantes();
-    int getSecciones();
-    void setNombre(string);
-    void setUbicacion(string);
-    Catalogo**** getDivisionBiblioteca();
-};
-Biblioteca::Biblioteca(string _nombre, string _ubicacion, int _pisos, int _estantes, int _secciones) {
-    nombre = _nombre;
-    ubicacion = _ubicacion;
-    pisos=_pisos;
-    secciones=_secciones;
-    estantes=_estantes;
-    divisionBiblioteca = new Catalogo***[_pisos];
-    for (int i = 0; i < _pisos; i++)
-    {
-        divisionBiblioteca[i] = new Catalogo**[_estantes];
-        for (int j = 0; j < _estantes; j++)
-        {
-            divisionBiblioteca[i][j] = new Catalogo*[_secciones];
-            for (int k = 0; k < _secciones; k++)
-            {
-                divisionBiblioteca[i][j][k] = new Catalogo();
-            }
-
-        }
-
-    }
-}
-string Biblioteca::getNombre() {
-    return nombre;
-}
-string Biblioteca::getUbicacion() {
-    return ubicacion;
-}
-int Biblioteca::getPisos() {
-    return pisos;
-}
-int Biblioteca::getEstantes() {
-    return estantes;
-}
-Catalogo**** Biblioteca::getDivisionBiblioteca() {
-    return divisionBiblioteca;
-}
-int Biblioteca::getSecciones() {
-    return secciones;
-}
-void Biblioteca::setNombre(string _newNombre) {
-    nombre=_newNombre;
-}
-void Biblioteca::setUbicacion(string _newUbicacion) {
-    ubicacion = _newUbicacion;
-}
-
-
 
 int main() {
     char resp = 's';
